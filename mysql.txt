@@ -1,0 +1,146 @@
+create database movies;
+use movies;
+create table users(
+Name varchar(20),
+pass varchar(70),
+Email varchar(40),
+Last_Name varchar(20),
+User_ID varchar (20),
+Primary Key (User_Id)
+);
+
+create table movie (
+Movie_Id Int Not Null Auto_Increment,
+Movie_Name Varchar(30),
+Release_Year Varchar(4),
+Language Varchar(20),
+Primary Key (Movie_Id)
+);
+
+create table director(
+Director_Id Int Not Null Auto_Increment,
+D_Fname Varchar(25),
+D_Lname Varchar(25),
+Primary Key (Director_Id)
+);
+
+create table Movie_Direction(
+MovieID Int,
+DirectorId Int,
+MovieName Varchar(30),
+DirectorName Varchar(25),
+FOREIGN KEY (MovieID) REFERENCES movie(Movie_ID),
+FOREIGN KEY (DirectorId) REFERENCES director(Director_Id)
+ );
+
+
+create table Actor (
+Actor_ID Int Not Null Auto_Increment,
+Actor_Fname Varchar(25),
+Actor_Lname Varchar(25),
+Primary KEY (Actor_ID)
+);
+
+
+
+create table movie_cast(
+Act_Id Int,
+MovieID Int,
+Foreign Key (Act_Id) REFERENCES Actor(Actor_ID),
+Foreign Key (MovieId) REFERENCES movie(Movie_ID)
+);
+
+ 
+Insert into movie values (default, "Avengers Endgame", 2019, "English");
+Insert into movie values (default, "Titanic", 1997, "English");
+Insert into movie values (default, "Quantum of Solace", 2008 , "English");
+Insert into movie values (default, "IP Man", 2008 , "Mandarin");
+Insert into movie values (default, "Pirates of the Caribbean: Dead Men Tell No Tales", 2017 , "English");
+Insert into movie values (default, "La Vie en rose", 2007 , "French");
+Insert into movie values (default, "The Man from Nowhere", 2010 , "Korean");
+Insert into movie values (default, "Casablanca", 1942 , "English");
+Insert into movie values (default, "Indiana Jones and the Raiders of the Lost Ark", 1981 , "English");
+
+Insert into Actor values (default, "Josh", "Brolin");
+Insert into Actor values (default, "Robert", "DowneyJr.");
+Insert into Actor values (default, "Leaonardo", "DiCaprio");
+Insert into Actor values (default, "Rose", "DeWitt");
+Insert into Actor values (default, "Daniel","Craig");
+Insert into Actor values (default, "Donnie","Yen");
+Insert into Actor values (default, "Johnny","Depp");
+Insert into Actor values (default, "Louise","Leplee");
+Insert into Actor values (default, "Tae-sik","Cha");
+Insert into Actor values (default, "Rick","Blaine");
+Insert into Actor values (default, "Ilsa","Lund");
+Insert into Actor values (default, "Harrison","Ford");
+Insert into Actor values (default, "Karen","Allen");
+
+
+
+
+
+
+
+Insert into Director values(default, "Anthony", "Russo");
+Insert into Director values(default, "Joe", "Russo");
+Insert into Director values(default, "James","Cameron");
+Insert into Director values(default, "Marc","Forster");
+Insert into Director values(default, "Wilson","Yip");
+Insert into Director values(default, "Joachim", "Ronning");
+Insert into Director values(default, "Espen", "Sandberg");
+Insert into Director values(default, "Olivier", "Dahan");
+Insert into Director values(default, "Lee","Jeong-beom");
+Insert into Director values(default, "Michael","Curtiz");
+Insert into Director values(default, "Steven","Spielberg");
+
+
+
+
+
+Insert into movie_cast values( (select actor_id from actor where actor_id = '1'), (select movie_id from movie where movie_id = '1'));
+Insert into movie_cast values( (select actor_id from actor where actor_id = '2'), (select movie_id from movie where movie_id = '1'));
+Insert into movie_cast values( (select actor_id from actor where actor_id = '3'), (select movie_id from movie where movie_id = '2'));
+Insert into movie_cast values( (select actor_id from actor where actor_id = '4'), (select movie_id from movie where movie_id = '2'));
+Insert into movie_cast values( (select actor_id from actor where actor_id = '5'), (select movie_id from movie where movie_id = '3'));
+Insert into movie_cast values( (select actor_id from actor where actor_id = '6'), (select movie_id from movie where movie_id = '4'));
+Insert into movie_cast values( (select actor_id from actor where actor_id = '7'), (select movie_id from movie where movie_id = '6'));
+Insert into movie_cast values( (select actor_id from actor where actor_id = '8'), (select movie_id from movie where movie_id = '7'));
+Insert into movie_cast values( (select actor_id from actor where actor_id = '9'), (select movie_id from movie where movie_id = '11'));
+Insert into movie_cast values( (select actor_id from actor where actor_id = '10'), (select movie_id from movie where movie_id = '9'));
+Insert into movie_cast values( (select actor_id from actor where actor_id = '11'), (select movie_id from movie where movie_id = '9'));
+Insert into movie_cast values( (select actor_id from actor where actor_id = '12'), (select movie_id from movie where movie_id = '10'));
+Insert into movie_cast values( (select actor_id from actor where actor_id = '13'), (select movie_id from movie where movie_id = '10'));
+
+
+
+
+
+Insert into movie_direction values( (select director_id from director where director_id = '1'), (select movie_id from movie where movie_id = '1'));
+Insert into movie_direction values( (select director_id from director where director_id = '2'), (select movie_id from movie where movie_id = '1'));
+Insert into movie_direction values( (select director_id from director where director_id = '3'), (select movie_id from movie where movie_id = '2'));
+Insert into movie_direction values( (select director_id from director where director_id = '4'), (select movie_id from movie where movie_id = '3'));
+Insert into movie_direction values( (select director_id from director where director_id = '5'), (select movie_id from movie where movie_id = '4'));
+Insert into movie_direction values( (select director_id from director where director_id = '6'), (select movie_id from movie where movie_id = '6'));
+Insert into movie_direction values( (select director_id from director where director_id = '7'), (select movie_id from movie where movie_id = '6'));
+Insert into movie_direction values( (select director_id from director where director_id = '8'), (select movie_id from movie where movie_id = '7'));
+Insert into movie_direction values( (select director_id from director where director_id = '9'), (select movie_id from movie where movie_id = '11'));
+Insert into movie_direction values( (select director_id from director where director_id = '10'), (select movie_id from movie where movie_id = '9'));
+Insert into movie_direction values( (select director_id from director where director_id = '11'), (select movie_id from movie where movie_id = '10'));
+
+
+
+create user 'Rob'@'localhost' identified by 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'rob'@'localhost' IDENTIFIED BY 'password';
+flush privileges;
+
+
+
+
+
+
+
+
+
+
+
+
